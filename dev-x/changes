@@ -1,0 +1,65 @@
+# Change Log
+
+This document tracks all changes and features added to the DeveloperX Portfolio project.
+
+- Entry format: YYYY-MM-DD HH:MM (local) — Summary — Affected paths
+- Keep newest entries at the top.
+
+## 2025-09-19 17:28 — Expand .gitignore with editor, env, cache, and lockfile patterns — .gitignore
+- Added ignores for:
+  - Env variants: `.env.local`, `.env.development.local`, `.env.test.local`, `.env.production.local`
+  - Next/Vercel caches: `.next/cache`, `.vercel/output`
+  - Non-npm lockfiles: `yarn.lock`, `pnpm-lock.yaml`, `bun.lockb`
+  - Editors/IDEs and temp files: `.vscode/`, `.idea/`, `*.sw?`, `*~`, `*.orig`
+  - Lint/test artifacts: `.eslintcache`, `.nyc_output/`, `playwright-report/`, `test-results/`
+  - Build tooling caches: `.turbo/`
+  - Direnv: `.envrc`
+  - OS junk: `Thumbs.db`
+
+## 2025-09-19 02:22 — Enforce `changes` updates via pre-commit hook; add templated entry script — package.json, scripts/*, changes
+- Tooling
+  - Added devDependency and config for `simple-git-hooks` in `package.json`
+  - Added postinstall hook to enable git hooks
+  - Created `scripts/check-changes-updated.mjs` to require `changes` to be staged on commit
+  - Created `scripts/add-change-entry.mjs` and npm script `changes:add` to append templated entries
+- Usage
+  - Run `npm install` (or `npm run postinstall`) once to activate hooks
+  - Add an entry: `npm run changes:add -- "Summary here" "affected/path1, affected/path2"`
+  - Stage the `changes` file before committing
+  - Bypass (not recommended): `CHANGES_BYPASS=1 git commit -m "..."`
+
+## 2025-09-19 02:17 — Initial portfolio scaffolding with Chakra UI, Supabase, and TypeScript
+- Added Chakra UI integration and theme provider
+  - Added: `app/providers.tsx`
+  - Added: `theme/index.ts`
+  - Updated: `app/layout.tsx` to wrap with `Providers`, include `Header` and `Footer`, and set metadata
+- Core layout and navigation components
+  - Added: `components/Header.tsx` (responsive navigation + color mode toggle)
+  - Added: `components/Footer.tsx`
+- Reusable UI component
+  - Added: `components/ProjectCard.tsx`
+- Pages scaffolded (Next.js App Router)
+  - Updated: `app/page.tsx` with Chakra-based hero section
+  - Added: `app/about/page.tsx`
+  - Added: `app/projects/page.tsx`
+  - Added: `app/contact/page.tsx` (form with react-hook-form)
+- API route and Supabase integration
+  - Added: `app/api/contact/route.ts` to insert contact submissions into `contacts` table
+  - Added: `lib/supabaseClient.ts` (browser client using `NEXT_PUBLIC_*` env vars)
+- Environment configuration
+  - Updated: `.gitignore` to allow tracking env examples (`!.env.example`, `!.env.local.example`)
+  - Added: `.env.example` with `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`
+- ESLint and Prettier configuration
+  - Added: `.eslintrc.json`, `.prettierrc`, `.prettierignore`
+- Dependencies and tooling alignment
+  - Updated: `package.json` to React 18.3.1, Next 14.2.5, Chakra UI 2.x, Framer Motion 10.x, Supabase JS 2.x
+  - Installed dependencies via `npm install`
+- Global styles cleanup
+  - Updated: `app/globals.css` to remove Tailwind import and Tailwind-specific `@theme` block
+- Documentation
+  - Updated: `README.md` with project intro, stack, structure, setup, Supabase table SQL, and deployment notes
+
+Notes:
+- Contact API uses `SUPABASE_SERVICE_ROLE_KEY` on the server. Configure these env vars locally in `.env.local` and in Vercel project settings for production.
+- The theme is minimal and intended for extension.
+- This file will be updated any time features or changes are added.
