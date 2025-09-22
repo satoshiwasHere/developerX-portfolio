@@ -5,17 +5,9 @@ export const metadata = {
 
 import { Box, Heading, SimpleGrid, Text } from "@chakra-ui/react";
 import ProjectCard from "@/components/ProjectCard";
+import projects from "@/data/projects";
 
 export default function ProjectsPage() {
-  const projects = [
-    {
-      title: "Portfolio Starter",
-      description: "This very portfolio scaffold built with Next.js, Chakra UI, and Supabase.",
-      href: "#",
-      tags: ["Next.js", "Chakra UI", "TypeScript"],
-    },
-  ];
-
   return (
     <Box as="section" maxW="6xl" mx="auto" px={4} py={12}>
       <Heading as="h1" size="xl" mb={6}>Projects</Heading>
@@ -24,7 +16,13 @@ export default function ProjectsPage() {
       ) : (
         <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
           {projects.map(p => (
-            <ProjectCard key={p.title} {...p} />
+            <ProjectCard
+              key={p.id}
+              title={p.title}
+              description={p.description}
+              tags={p.tags}
+              href={p.hrefLive ?? p.hrefRepo}
+            />
           ))}
         </SimpleGrid>
       )}

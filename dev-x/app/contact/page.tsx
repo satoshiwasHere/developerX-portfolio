@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Box, Button, FormControl, FormLabel, Input, Textarea, Heading, Stack, Alert, AlertIcon } from "@chakra-ui/react";
+import { Box, Button, FormControl, FormLabel, Input, Textarea, Heading, Stack, Alert, AlertIcon, Text, HStack, Link } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
+import socials from "@/data/socials";
 
 type ContactForm = {
   name: string;
@@ -35,7 +36,18 @@ export default function ContactPage() {
 
   return (
     <Box as="section" maxW="2xl" mx="auto" px={4} py={12}>
-      <Heading as="h1" size="xl" mb={6}>Contact</Heading>
+      <Heading as="h1" size="xl" mb={4}>Contact</Heading>
+      <Text color="gray.500" mb={4}>
+        I’m open to freelance work, long-term roles, and collaborations. Reach out via the form
+        or connect directly:
+      </Text>
+      <HStack spacing={4} mb={8} wrap="wrap">
+        {socials.map(s => (
+          <Link key={s.label} href={s.href} isExternal color="teal.500">
+            {s.label}
+          </Link>
+        ))}
+      </HStack>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={4}>
           <FormControl isRequired>
