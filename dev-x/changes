@@ -5,6 +5,13 @@ This document tracks all changes and features added to the DeveloperX Portfolio 
 - Entry format: YYYY-MM-DD HH:MM (local) — Summary — Affected paths
 - Keep newest entries at the top.
 
+## 2025-09-22 23:31 — Enhance global metadata (SEO/OG/Twitter) — app/layout.tsx, changes
+- Metadata
+  - Updated: `app/layout.tsx` — added `keywords`, `authors`, `creator`, and default `openGraph`/`twitter` entries
+  - Defaults include site title/description and placeholders for URL and Twitter handle
+- Docs
+  - Updated: `changes` with this entry
+
 ## 2025-09-22 21:45 — Fonts, Next.js config migration, and security update — app/*, next.config.*, package*.json
 - Fonts
   - Updated: `app/layout.tsx` — replaced unsupported `Geist`/`Geist_Mono` with `Inter` and `Roboto_Mono` via `next/font/google` while preserving CSS variables `--font-geist-sans` and `--font-geist-mono`
