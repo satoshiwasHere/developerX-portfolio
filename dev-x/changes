@@ -5,6 +5,19 @@ This document tracks all changes and features added to the DeveloperX Portfolio 
 - Entry format: YYYY-MM-DD HH:MM (local) — Summary — Affected paths
 - Keep newest entries at the top.
 
+## 2025-09-22 21:45 — Fonts, Next.js config migration, and security update — app/*, next.config.*, package*.json
+- Fonts
+  - Updated: `app/layout.tsx` — replaced unsupported `Geist`/`Geist_Mono` with `Inter` and `Roboto_Mono` via `next/font/google` while preserving CSS variables `--font-geist-sans` and `--font-geist-mono`
+  - Updated: `app/globals.css` — applied `var(--font-geist-sans)` to `body` and `var(--font-geist-mono)` to `code`, `pre`, `kbd`, `samp`
+- Next.js configuration
+  - Added: `next.config.mjs` (ESM export)
+  - Removed: `next.config.ts` (unsupported by Next.js)
+- Security
+  - Ran `npm audit fix --force` to address critical advisories; updated `next` to `14.2.32`
+  - Updated: `package.json`, `package-lock.json`
+- Dev server
+  - Ensured commands run from project subdir `dev-x/` (`npm install`, `npm run dev`), restarted server after update
+
 ## 2025-09-19 17:28 — Expand .gitignore with editor, env, cache, and lockfile patterns — .gitignore
 - Added ignores for:
   - Env variants: `.env.local`, `.env.development.local`, `.env.test.local`, `.env.production.local`
